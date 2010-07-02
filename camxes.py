@@ -11,6 +11,8 @@ __CAMXES_URL__ = "http://www.digitalkingdom.org/~rlpowell/hobbies/lojban/grammar
 # if you have a camxes lying around somewhere, you can put the path to it here.
 camxespath = ""
 
+class CouldNotFindCamxesError(Exception): pass
+
 def find_camxes():
   global camxespath
   if camxespath:
@@ -25,9 +27,12 @@ def find_camxes():
         continue
       valids.append(found.strip())
 
+    if not valids:
+        raise CouldNotFindCamxesError()
+
     camxespath = valids[0]
     return camxespath
-  except OSError:
+  except (OSError, CouldNotFindCamxesError):
     try:
       # see if the file has already been downloaded.
       camxespath = os.path.expanduser("~/lojban/lojban_peg_parser.jar")
@@ -48,7 +53,7 @@ def find_camxes():
         camxesdata = dl.read()
         digest.update(camxesdata)
       
-        if digest.hexdigest != __CAMXES_MD5SUM__ and __CAMXES_MD5SUM__:
+        if digest.hexdigest() != __CAMXES_MD5SUM__ and __CAMXES_MD5SUM__:
           print "downloaded camxes from the website, but the md5 did not match."
           raise
 
@@ -57,13 +62,15 @@ def find_camxes():
           os.mkdir(lojbanfolder)
 
         camxespath = os.path.join(lojbanfolder, "lojban_peg_parser.jar")
-        open(camxespath, "w").write(dldata)
+        open(camxespath, "w").write(camxesdata)
         return camxespath
       except:
         pass
 
   print "could not find camxes by using locate, looking into", os.path.expanduser("~/lojban/lojban_peg_parser.jar"), "nor by downloading it from", __CAMXES_URL__
   print "please get camxes by yourself."
+
+  raise CouldNotFindCamxesError()
 
 def find_vlatai():
   return "vlatai"
