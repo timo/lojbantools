@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
         name = "lojbantools",
-        version = "0.2",
+        version = "0.2.1",
 
         # metadata for PYPI
         author = "Timo Paulssen",
