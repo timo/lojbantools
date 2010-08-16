@@ -3,14 +3,14 @@ from setuptools import setup
 
 setup(
         name = "lojbantools",
-        version = "0.2.1",
+        version = "0.2.2",
 
         # metadata for PYPI
         author = "Timo Paulssen",
         author_email = "timo+lojbantools@wakelift.de",
         description = "This package offers access to a bunch of lojban tools.",
         license = "BSD",
-        download_url = "http://wakelift.de/lojban/software/python/lojbantools-0.2.1.tar.gz",
+        download_url = "http://wakelift.de/lojban/software/python/lojbantools-0.2.2.tar.gz",
 
         py_modules = ["camxes"],
 
