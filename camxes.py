@@ -132,8 +132,9 @@ def call_camxes(text, *arguments):
 
     result = ""
 
-    # if camxes is started with -t, it will not print two newlines at the end
-    if "-t" in arguments:
+    # only if camxes was started with no arguments will it terminate chunks 
+    # with two newlines.
+    if len(arguments) > 0:
         delim = "\n"
     else:
         delim = "\n\n"

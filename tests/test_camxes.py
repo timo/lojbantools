@@ -17,6 +17,10 @@ def test_camxes_tree():
     assert "cipra" in call_camxes("cipra")
     assert "gerku" in call_camxes("lo gerku cu klama")
 
+def test_camxes_terml():
+    assert "cipra" in call_camxes("cipra", "-e")
+    assert "gerku" in call_camxes("lo gerku cu klama", "-e")
+
 def test_vlatai():
     assert call_vlatai("jbopre") == ["jbopre", "lujvo", "jbopre"]
     assert call_vlatai("gerku") == ["gerku", "gismu", "gerku"]
